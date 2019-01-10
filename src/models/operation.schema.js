@@ -29,8 +29,8 @@ const operationSchema = mongoose.Schema({
             address: String,
             map: String,
         }],
-        rutines: [{data:String,notEditable:Boolean}],
-        links: [{data:String,notEditable:Boolean}],
+        rutines: [{data:String,editable:Boolean}],
+        links: [{data:String,editable:Boolean}],
         familiars: [{
             idFamiliar: Number,
             nameFamiliar: String,
