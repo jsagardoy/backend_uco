@@ -9,8 +9,8 @@ mongoose.connect('mongodb://localhost:27017/ucoDB',{ useNewUrlParser: true });
 app.use(cors());
 var routes = require ('./src/routes/routes');
 // configuramos la app para que use bodyParser(), esto nos dejara usar la informacion de los POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
 
 var port = process.env.PORT || 4000;        // seteamos el puerto
 
