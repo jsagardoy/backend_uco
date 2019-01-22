@@ -129,7 +129,6 @@ router.route('/login/:user')
             if (err) {
                 res.send(err);
             }
-            console.log(response);
             if (response.n>0){
                 res.json({ message: `La operación ${req.params.user} fue eliminada correctamente` });
             }else{
