@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Operations = require('../models/operation.schema');   //Creamos el router de express
-const Users = require('../models/user.schema');
+//const Users = require('../models/user.schema');
 
 // Seteamos la ruta principal
 router.get('/', function (req, res) {
@@ -64,79 +64,5 @@ router.route('/operation')
         });
     });
 
-//login Entity
-//getAll users
-router.route('/login')
-    .get((req, res) => {
-        Users.find({}).exec((err, login) => {
-            if (err) {
-                res.send(err);
-            }
-            console.log(login);
-            res.json(login);
-        })
-    })
-//get particular user
-router.route('/login/:user')
-    .get((req, res) => {
-        Users.findOne({ user: req.params.user }).exec((err, login) => {
-            if (err) {
-                res.send(err);
-            }
-            console.log(login);
-            res.json(login);
-        })
-    })
-//update a particular user
-router.route('/login/:user')
-    .put((req, res) => {
-        Users.findOne({ user:req.params.user }, (err, response) => {
-            if (response) {
-                Users.findOneAndUpdate({ user: req.params.user },
-                    req.body,
-                    ((err, user) => {
-                        if (err) {
-                            return res.status(500).send(err); 
-                        }else {
-                            return res.send({ message: `El usuario ${user} se ha actualizado con ${req.body.user}` });
-                        }
-                    })
-                )
-            }else{
-                return res.send({ message: `No se encuentra el registro` });
-            }
-        })
-    });
-//add a new user
-    router.route('/createUser')
-    .put((req, res) => {
-        Users.findOne({ user:req.body.user }, (err, response) => {
-            if (response) {
-                return res.send({ message: `El usuario ${req.body.user} ya existe, por favor indique otro usuario`});
-            }else{
-                const newUser = new Users(req.body);
-                newUser.save(err => {
-                    if (err) return res.status(500).send(err);
-                    return res.status(200).send(newUser);
-                })
-            }
-        })
-    });
-
-router.route('/login/:user')
-    .delete((req, res) => {
-        Users.deleteOne({ user: req.params.user }, (err, response) => {
-            if (err) {
-                res.send(err);
-            }
-            if (response.n>0){
-                res.json({ message: `La operación ${req.params.user} fue eliminada correctamente` });
-            }else{
-                res.json({ message: `El elemento ${req.params.user} no existe` });
-            }
-            
-        })
-    });
-// Le decimos a la aplicación que utilize las rutas que agregamos
 
 module.exports = router;
