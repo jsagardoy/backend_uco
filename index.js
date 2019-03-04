@@ -8,6 +8,9 @@ var cors = require('cors');
 var jwt = require('./src/helpers/jwt');
 var errorHandler = require('./src/helpers/error-handler');
 
+var fs = require('fs');
+var https = require('https');
+
 //Creamos la conexión con mongo
 mongoose.connect('mongodb://localhost:27017/ucoDB',{
     useCreateIndex: true,
@@ -22,6 +25,9 @@ app.use(bodyParser.json({limit: '50mb'}));
 // use JWT auth to secure the api
 app.use(jwt());
 const port = process.env.NODE_ENV === 'production' ? 80 : 4000; // seteamos el puerto
+
+
+
 //var port = process.env.PORT || 4000;
 
 //var router = express.Router();   //Creamos el rout
@@ -34,5 +40,11 @@ app.use('/users', require('./src/users/user.controller'));
 app.use(errorHandler);
 // Iniciamos el servidor
 
-app.listen(port);
-console.log(`Running on port ${port}`);
+/* app.listen(port);
+console.log(`Running on port ${port}`); */
+https.createServer({
+  key: fs.readFileSync('./certificatesUCO/uco.key'),
+  cert: fs.readFileSync('./certificatesUCO/uco.crt')
+}, app).listen(port, function(){
+  console.log("My https server listening on port " + port + "...");
+});
