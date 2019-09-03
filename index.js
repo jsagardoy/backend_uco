@@ -11,8 +11,9 @@ var errorHandler = require('./src/helpers/error-handler');
 var fs = require('fs');
 var https = require('https');
 
+var prodURL=`mongodb+srv://user:12345@cluster0-ohrxc.mongodb.net/test?retryWrites=true&w=majority`;
 //Creamos la conexión con mongo
-mongoose.connect('mongodb://localhost:27017/ucoDB',{
+mongoose.connect(prodURL||'mongodb://localhost:27017/ucoDB',{
     useCreateIndex: true,
     useNewUrlParser: true
   });
