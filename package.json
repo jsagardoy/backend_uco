@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "backend for UCO project",
   "main": "index.js",
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
   "scripts": {
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
