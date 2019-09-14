@@ -10,10 +10,12 @@ var errorHandler = require('./src/helpers/error-handler');
 
 var fs = require('fs');
 var https = require('https');
+var http =  require('http');
+var isHttps=false;
 
-var prodURL=`mongodb+srv://user:12345@cluster0-ohrxc.mongodb.net/test?retryWrites=true&w=majority`;
+//var prodURL=`mongodb+srv://user:12345@cluster0-ohrxc.mongodb.net/test?retryWrites=true&w=majority`;
 //Creamos la conexión con mongo
-mongoose.connect(prodURL||'mongodb://localhost:27017/ucoDB',{
+mongoose.connect('mongodb://localhost:27017/ucoDB',{
     useCreateIndex: true,
     useNewUrlParser: true
   });
@@ -43,9 +45,15 @@ app.use(errorHandler);
 
 /* app.listen(port);
 console.log(`Running on port ${port}`); */
-https.createServer({
-  key: fs.readFileSync('./certificatesUCO/uco.key'),
-  cert: fs.readFileSync('./certificatesUCO/uco.crt')
-}, app).listen(port, function(){
-  console.log("My https server listening on port " + port + "...");
-});
+if (isHttps){
+  https.createServer({
+    key: fs.readFileSync('./certificatesUCO/uco.key'),
+    cert: fs.readFileSync('./certificatesUCO/uco.crt')
+  }, app).listen(port, function(){
+    console.log("My https server listening on port " + port + "...");
+  });
+}else{
+  http.createServer(app).listen(port, function(){
+    console.log("My http server listening on port " + port + "...");
+  });
+}
