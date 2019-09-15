@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(bodyParser.json({limit: '50mb'}));
 // use JWT auth to secure the api
 app.use(jwt());
-const port = process.env.NODE_ENV === 'production' ? 80 : 4000; // seteamos el puerto
+const port =80; // seteamos el puerto
 
 
 
