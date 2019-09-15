@@ -9,7 +9,7 @@ var jwt = require('./src/helpers/jwt');
 var errorHandler = require('./src/helpers/error-handler');
 
 var fs = require('fs');
-var https = require('https');
+//var https = require('https');
 var http =  require('http');
 var isHttps=false;
 
@@ -51,12 +51,12 @@ app.use(errorHandler);
 /* app.listen(port);
 console.log(`Running on port ${port}`); */
 if (isHttps){
-  https.createServer({
+ /*https.createServer({
     key: fs.readFileSync('./certificatesUCO/uco.key'),
     cert: fs.readFileSync('./certificatesUCO/uco.crt')
   }, app).listen(port, function(){
     console.log("My https server listening on port " + port + "...");
-  });
+  });*/
 }else{
   http.createServer(app).listen(port, function(){
     console.log("My http server listening on port " + port + "...");
