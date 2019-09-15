@@ -15,10 +15,15 @@ var isHttps=false;
 
 //var prodURL=`mongodb+srv://user:12345@cluster0-ohrxc.mongodb.net/test?retryWrites=true&w=majority`;
 //Creamos la conexión con mongo
-mongoose.connect('mongodb://localhost:27017/ucoDB',{
+mongoose.connect('mongodb+srv://user:12345@cluster0-ohrxc.mongodb.net/ucoDB?retryWrites=true&w=majority',{
     useCreateIndex: true,
     useNewUrlParser: true
   });
+
+/* mongoose.connect('mongodb://localhost:27017/ucoDB',{
+    useCreateIndex: true,
+    useNewUrlParser: true
+  }); */
   
 app.use(cors());
 var routes = require ('./src/routes/routes');
