@@ -33,11 +33,11 @@ app.use(bodyParser.json({limit: '50mb'}));
 // use JWT auth to secure the api
 app.use(jwt());
 //const port =80; // seteamos el puerto
-app.set('port', (process.env.PORT || 5000));
+//app.set('port', (process.env.PORT || 5000));
 
 
 
-//var port = process.env.PORT || 4000;
+var port = process.env.PORT || 4000;
 
 //var router = express.Router();   //Creamos el rout
 
